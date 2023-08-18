@@ -1827,17 +1827,8 @@ class Portal(DBPortal, BasePortal):
         return EventID(f"${b64hash}:instagram.com")
 
     async def handle_instagram_remove(self, item_id: str) -> None:
-        message = await DBMessage.get_by_item_id(item_id, self.receiver)
-        if message is None:
-            return
-        await message.delete()
-        if message.mxid:
-            sender = await p.Puppet.get_by_pk(message.sender)
-            try:
-                await sender.intent_for(self).redact(self.mxid, message.mxid)
-            except MForbidden:
-                await self.main_intent.redact(self.mxid, message.mxid)
-            self.log.debug(f"Redacted {message.mxid} after Instagram unsend")
+        print("Intentionally skipped instagram redact event '{}'.".format(item_id))
+
 
     async def handle_instagram_reaction(self, item: ThreadItem, remove: bool) -> None:
         sender = await p.Puppet.get_by_pk(item.new_reaction.sender_id)
