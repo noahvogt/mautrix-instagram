@@ -23,3 +23,9 @@ contains a general overview of what is supported by the bridge.
 
 ## Discussion
 Matrix room: [`#instagram:maunium.net`](https://matrix.to/#/#instagram:maunium.net)
+
+## Workflow
+
+	doas docker build -t instagram:$TAG .
+	doas docker tag instagram:$TAG noahvogt/mautrix-instagram:$TAG
+	doas docker push noahvogt/mautrix-instagram:$TAG
